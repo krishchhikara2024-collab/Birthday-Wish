@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ananya ✨</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#050314;
+overflow-x:hidden;
+color:white;
+}
+
+section{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:50px;
+position:relative;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.loader{
+position:fixed;
+inset:0;
+background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.loader h2{
+margin-top:20px;
+color:#ff4fa3;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+50%{opacity:.3}
+}
+
+.hero{
+background:
+radial-gradient(circle at top,#7b61ff55,transparent),
+radial-gradient(circle at bottom,#ff4fa355,transparent);
+}
+
+.title{
+font-size:6rem;
+text-align:center;
+font-weight:900;
+background:linear-gradient(45deg,#ff4fa3,#ffd700,#6ee7ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{
+filter:drop-shadow(0 0 10px #ff4fa3);
+}
+to{
+filter:drop-shadow(0 0 40px #ffd700);
+}
+}
+
+.cake{
+font-size:180px;
+cursor:pointer;
+transition:.4s;
+}
+
+.cake:hover{
+transform:scale(1.1) rotate(5deg);
+}
+
+.message{
+max-width:800px;
+font-size:1.3rem;
+text-align:center;
+margin-top:20px;
+}
+
+.countdown{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.time-box{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:20px;
+min-width:120px;
+text-align:center;
+}
+
+.time-box h3{
+font-size:3rem;
+color:#ffd700;
+}
+
+.memory-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+width:100%;
+max-width:1200px;
+}
+
+.card{
+background:rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+padding:25px;
+border-radius:20px;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+box-shadow:0 0 30px #ff4fa3;
+}
+
+.wishes{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+width:100%;
+max-width:1200px;
+}
+
+.gifts{
+display:flex;
+gap:30px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.gift{
+font-size:100px;
+cursor:pointer;
+transition:.3s;
+}
+
+.gift:hover{
+transform:scale(1.2);
+}
+
+.finale{
+background:
+linear-gradient(180deg,#050314,#120c40,#050314);
+}
+
+.finale h1{
+font-size:6rem;
+text-align:center;
+}
+
+.finale p{
+font-size:1.5rem;
+max-width:900px;
+text-align:center;
+margin-top:20px;
+}
+
+.btn{
+padding:15px 30px;
+background:#ff4fa3;
+border:none;
+border-radius:30px;
+color:white;
+cursor:pointer;
+margin-top:30px;
+font-size:1rem;
+}
+
+.floating{
+position:absolute;
+font-size:25px;
+animation:float 8s linear infinite;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+}
+to{
+transform:translateY(-120vh);
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="loader" id="loader">
+<div style="font-size:120px;">🎂</div>
+<h2>Preparing a magical surprise for Ananya...</h2>
+</div>
+
+<canvas id="stars"></canvas>
+
+<section class="hero">
+
+<h1 class="title">
+HAPPY BIRTHDAY<br>
+ANANYA
+</h1>
+
+<div class="cake" onclick="celebrate()">
+🎂
+</div>
+
+<p class="message">
+Today is all about you, Ananya. May your year be filled
+with happiness, adventure, success and unforgettable memories.
+</p>
+
+<button class="btn" onclick="celebrate()">
+Start Celebration
+</button>
+
+</section>
+
+<section>
+
+<h1>Birthday Countdown</h1>
+
+<div class="countdown">
+
+<div class="time-box">
+<h3 id="days">0</h3>
+<p>Days</p>
+</div>
+
+<div class="time-box">
+<h3 id="hours">0</h3>
+<p>Hours</p>
+</div>
+
+<div class="time-box">
+<h3 id="minutes">0</h3>
+<p>Minutes</p>
+</div>
+
+<div class="time-box">
+<h3 id="seconds">0</h3>
+<p>Seconds</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h1 style="margin-bottom:40px;">
+Memory Timeline
+</h1>
+
+<div class="memory-grid">
+
+<div class="card">
+<h2>✨ Special Day</h2>
+<p>A beautiful memory worth celebrating forever.</p>
+</div>
+
+<div class="card">
+<h2>🎉 Achievement</h2>
+<p>A proud milestone in Ananya's journey.</p>
+</div>
+
+<div class="card">
+<h2>💖 Friendship</h2>
+<p>Moments filled with laughter and joy.</p>
+</div>
+
+<div class="card">
+<h2>🌈 Adventure</h2>
+<p>Fun experiences and unforgettable stories.</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h1 style="margin-bottom:40px;">
+Birthday Wishes Wall
+</h1>
+
+<div class="wishes">
+
+<div class="card">
+💖 Happy Birthday Ananya!
+</div>
+
+<div class="card">
+🌟 May all your dreams come true.
+</div>
+
+<div class="card">
+🎂 Wishing endless happiness.
+</div>
+
+<div class="card">
+✨ Stay amazing always.
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h1 style="margin-bottom:50px;">
+Gift Room
+</h1>
+
+<div class="gifts">
+
+<div class="gift" onclick="gift('You are wonderful! 💖')">
+🎁
+</div>
+
+<div class="gift" onclick="gift('A year full of happiness! 🌟')">
+🎁
+</div>
+
+<div class="gift" onclick="gift('Dream big and shine bright! ✨')">
+🎁
+</div>
+
+</div>
+
+</section>
+
+<section class="finale">
+
+<h1>
+Happy Birthday Ananya
+</h1>
+
+<p>
+May this year bring endless happiness,
+beautiful memories and dreams come true.
+May every day sparkle with joy and magic.
+</p>
+
+<button class="btn" onclick="fireworksBurst()">
+Launch Fireworks
+</button>
+
+</section>
+
+<script>
+
+setTimeout(()=>{
+document.getElementById('loader').style.display='none';
+},3500);
+
+const targetDate=new Date("October 05, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+
+const now=new Date().getTime();
+
+const diff=targetDate-now;
+
+document.getElementById("days").innerHTML=
+Math.floor(diff/(1000*60*60*24));
+
+document.getElementById("hours").innerHTML=
+Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+
+document.getElementById("minutes").innerHTML=
+Math.floor((diff%(1000*60*60))/(1000*60));
+
+document.getElementById("seconds").innerHTML=
+Math.floor((diff%(1000*60))/1000);
+
+},1000);
+
+function celebrate(){
+
+for(let i=0;i<80;i++){
+
+let conf=document.createElement("div");
+
+conf.innerHTML=["🎉","✨","💖","🎊","🌟"][Math.floor(Math.random()*5)];
+
+conf.style.position="fixed";
+conf.style.left=Math.random()*100+"vw";
+conf.style.top="-20px";
+conf.style.fontSize="30px";
+conf.style.zIndex="999";
+
+document.body.appendChild(conf);
+
+let pos=-20;
+
+let anim=setInterval(()=>{
+
+pos+=5;
+
+conf.style.top=pos+"px";
+
+if(pos>window.innerHeight){
+
+clearInterval(anim);
+
+conf.remove();
+
+}
+
+},16);
+
+}
+
+}
+
+function gift(msg){
+
+alert(msg);
+
+celebrate();
+
+}
+
+function fireworksBurst(){
+
+celebrate();
+
+celebrate();
+
+celebrate();
+
+}
+
+for(let i=0;i<30;i++){
+
+let el=document.createElement("div");
+
+el.className="floating";
+
+el.innerHTML=["💖","✨","🎈","🌟"][Math.floor(Math.random()*4)];
+
+el.style.left=Math.random()*100+"vw";
+el.style.animationDuration=(5+Math.random()*10)+"s";
+
+document.body.appendChild(el);
+
+}
+
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+
+for(let i=0;i<250;i++){
+
+stars.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2
+});
+
+}
+
+function animateStars(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="white";
+
+stars.forEach(s=>{
+
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+
+s.y+=0.3;
+
+if(s.y>canvas.height)
+s.y=0;
+
+});
+
+requestAnimationFrame(animateStars);
+
+}
+
+animateStars();
+
+</script>
+
+</body>
+</html>
